@@ -1,18 +1,72 @@
 import React from "react";
+import { ScrollView, SafeAreaView } from "react-native";
 import styled from "styled-components";
 import Card from "./components/Card";
+import { Icon } from "expo";
+import { NotificationIcon } from "./components/Icons";
+import Logo from "./components/Logo";
+import Course from "./components/Course";
 
 export default class App extends React.Component {
   render() {
     return (
       <Container>
-        <TitleBar>
-          <Avatar source={require("./assets/avatar.jpg")} />
-          <Title>Welcome back,</Title>
-          <Name>Aldo</Name>
-        </TitleBar>
-        <Subtitle>Continue Learning</Subtitle>
-        <Card />
+        <SafeAreaView>
+          <ScrollView style={{ height: "100%" }}>
+            <TitleBar>
+              <Avatar source={require("./assets/avatar.jpg")} />
+              <Title>Welcome back,</Title>
+              <Name>Aldo</Name>
+              <NotificationIcon
+                style={{ position: "absolute", right: 20, top: 5 }}
+              />
+            </TitleBar>
+            <ScrollView
+              style={{
+                flexDirection: "row",
+                padding: 20,
+                paddingLeft: 12,
+                paddingTop: 30
+              }}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              {logos.map((logo, index) => (
+                <Logo key={index} image={logo.image} text={logo.text} />
+              ))}
+            </ScrollView>
+            <Subtitle>Continue Learning</Subtitle>
+            <ScrollView
+              horizontal={true}
+              style={{ paddingBottom: 30 }}
+              showsHorizontalScrollIndicator={false}
+            >
+              {cards.map((card, index) => (
+                <Card
+                  key={index}
+                  image={card.image}
+                  title={card.title}
+                  caption={card.caption}
+                  logo={card.logo}
+                  subtitle={card.subtitle}
+                />
+              ))}
+            </ScrollView>
+            <Subtitle>Popular Courses</Subtitle>
+            {courses.map((course, index) => (
+              <Course
+                key={index}
+                title={course.title}
+                subtitle={course.subtitle}
+                image={course.image}
+                logo={course.logo}
+                author={course.author}
+                avatar={course.avatar}
+                caption={course.caption}
+              />
+            ))}
+          </ScrollView>
+        </SafeAreaView>
       </Container>
     );
   }
@@ -23,7 +77,7 @@ const Subtitle = styled.Text`
   color: #b8b3c3;
   font-weight: 600;
   margin-left: 20px;
-  margin-top: 50px;
+  margin-top: 10px;
   text-transform: uppercase;
 `;
 
@@ -59,3 +113,126 @@ const Avatar = styled.Image`
   top: 0px;
   left: 0px;
 `;
+
+const logos = [
+  {
+    image: require("./assets/logo-framerx.png"),
+    text: "Framer X"
+  },
+  {
+    image: require("./assets/logo-studio.png"),
+    text: "Studio"
+  },
+  {
+    image: require("./assets/logo-react.png"),
+    text: "React"
+  },
+  {
+    image: require("./assets/logo-swift.png"),
+    text: "Swift"
+  },
+  {
+    image: require("./assets/logo-sketch.png"),
+    text: "Sketch"
+  },
+  {
+    image: require("./assets/logo-figma.png"),
+    text: "Figma"
+  },
+  {
+    image: require("./assets/logo-invision.png"),
+    text: "Invision"
+  }
+];
+
+const cards = [
+  {
+    image: require("./assets/background1.jpg"),
+    title: "Figma Components",
+    caption: "Figma",
+    logo: require("./assets/logo-figma.png"),
+    subtitle: "1 of 8 sections"
+  },
+  {
+    image: require("./assets/background2.jpg"),
+    title: "Color and Textures",
+    caption: "Framer X",
+    logo: require("./assets/logo-framerx.png"),
+    subtitle: "2 of 5 sections"
+  },
+  {
+    image: require("./assets/background3.jpg"),
+    title: "Create a Project",
+    caption: "Invision",
+    logo: require("./assets/logo-invision.png"),
+    subtitle: "4 of 14 sections"
+  },
+  {
+    image: require("./assets/background4.jpg"),
+    title: "Styled Components",
+    caption: "React Native",
+    logo: require("./assets/logo-react.png"),
+    subtitle: "5 of 12 sections"
+  },
+  {
+    image: require("./assets/background5.jpg"),
+    title: "Boards",
+    caption: "Sketch",
+    logo: require("./assets/logo-sketch.png"),
+    subtitle: "2 of 8 sections"
+  },
+  {
+    image: require("./assets/background6.jpg"),
+    title: "Export to Code",
+    caption: "Studio",
+    logo: require("./assets/logo-studio.png"),
+    subtitle: "5 of 12 section"
+  },
+  {
+    image: require("./assets/background7.jpg"),
+    title: "UI View Component",
+    caption: "Swift",
+    logo: require("./assets/logo-swift.png"),
+    subtitle: "7 of 32 section"
+  }
+];
+
+const courses = [
+  {
+    title: "Prototype in InVision Studio",
+    subtitle: "10 sections",
+    image: require("./assets/background13.jpg"),
+    logo: require("./assets/logo-studio.png"),
+    author: "Meng To",
+    avatar: require("./assets/avatar.jpg"),
+    caption: "Design an interactive prototype"
+  },
+  {
+    title: "React for Designers",
+    subtitle: "12 sections",
+    image: require("./assets/background11.jpg"),
+    logo: require("./assets/logo-react.png"),
+    author: "Meng To",
+    avatar: require("./assets/avatar.jpg"),
+    caption: "Learn to design and code a React site"
+  },
+  {
+    title: "Design and Code with Framer X",
+    subtitle: "10 sections",
+    image: require("./assets/background14.jpg"),
+    logo: require("./assets/logo-framerx.png"),
+    author: "Meng To",
+    avatar: require("./assets/avatar.jpg"),
+    caption: "Create powerful design and code components for your app"
+  },
+  {
+    title: "Design System in Figma",
+    subtitle: "10 sections",
+    image: require("./assets/background6.jpg"),
+    logo: require("./assets/logo-figma.png"),
+    author: "Meng To",
+    avatar: require("./assets/avatar.jpg"),
+    caption:
+      "Complete guide to designing a site using a collaborative design tool"
+  }
+];
